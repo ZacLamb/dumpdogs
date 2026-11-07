@@ -1,0 +1,93 @@
+<%
+  const T = town.name;
+  const h = [...T].reduce((a, c) => a + c.charCodeAt(0), 0);
+  const pick = (arr) => arr[h % arr.length];
+  const regionCopy = {
+    home: {
+      jobs: ['basement and garage cleanouts', 'kitchen and bath remodels', 'yard and brush cleanups', 'shed tear-downs'],
+      line: `${T} is right in our backyard. We're based on Summer Street in Wareham, so getting a dumpster to you is about as easy as it gets.`,
+    },
+    cape: {
+      jobs: ['cottage and summer-rental cleanouts', 'roof replacements', 'deck and shed tear-outs', 'storm and brush cleanup'],
+      line: `We cross the bridges every week to keep ${T} projects moving — from seasonal cottage cleanouts to full re-roofs.`,
+    },
+    south_shore: {
+      jobs: ['whole-house renovations', 'roofing tear-offs', 'estate cleanouts', 'landscaping projects'],
+      line: `Up Route 3 and across the South Shore, ${T} homeowners and contractors count on us for dumpsters that show up on time.`,
+    },
+    south_coast: {
+      jobs: ['garage and boat-shed cleanouts', 'renovation debris', 'estate cleanouts', 'yard and storm cleanup'],
+      line: `Along Buzzards Bay and out to the South Coast, we keep ${T} job sites and driveways clear.`,
+    },
+  }[town.region];
+  const intro = pick([
+    `Need a dumpster in ${T}, MA? Dumpster Dawgs delivers 10 and 15 yard roll-off dumpsters across ${T} with same day or next day delivery when available — or on the exact day you book.`,
+    `Looking for dumpster rental in ${T}, MA? We're a local, veteran owned crew out of Wareham dropping 10 and 15 yard dumpsters all over ${T} — fair price, no hidden fees.`,
+    `Dumpster Dawgs is the local choice for dumpster rental in ${T}, Massachusetts. Pick a 10 or 15 yard, tell us when, and we'll drop it right where you need it.`,
+  ]);
+  const townFaqs = [
+    [`How much does a dumpster rental cost in ${T}, MA?`, `A 10 yard dumpster is $495 and a 15 yard is $595. Both include 7 days. The 10 yard includes 1 ton and the 15 yard includes 1.5 tons; overweight is $65 per 500 lbs.`],
+    [`How fast can I get a dumpster in ${T}?`, `Same day or next day delivery is often available in ${T}. Call or text ${business.phone} and we'll give you the earliest drop time. You can also book ahead.`],
+    [`What size dumpster do I need for my ${T} project?`, `Most ${regionCopy.jobs[0]} fit in a 10 yard (about 4 pickup loads). Bigger jobs like ${regionCopy.jobs[1]} usually need the 15 yard (about 6 pickup loads). Text us a photo and we'll help you pick.`],
+    [`Do I need a permit for a dumpster in ${T}?`, `If the dumpster sits in your driveway or on your own property, a permit usually isn't needed. Placing it on a public street may require permission from the Town of ${T}. Ask us when you book and we'll point you in the right direction.`],
+  ];
+  const schema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: townFaqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
+%>
+<%- include('partials/head', { schema }) %>
+<%- include('partials/phero', { crumbs: [['Service Area','/service-area'],[T]], kicker: region.name, h1: 'Dumpster Rental <span class="red">' + T + ', MA</span>', lead: '10 & 15 yard dumpsters from $495 · 7 days included · Same day or next day delivery · Veteran owned' }) %>
+
+<section class="sec">
+  <div class="wrap split split--form">
+    <div class="prose">
+      <p class="lead-p"><%= intro %></p>
+      <p><%= regionCopy.line %></p>
+      <h2 class="h3">Dumpsters for <%= T %> projects</h2>
+      <p>Our <%= T %> customers rent for <%= regionCopy.jobs.join(', ') %> — plus everything in between. Toss it in, give us a call, and we haul it away.</p>
+      <ul class="ticks">
+        <li><%- include('partials/icon', {name:'check'}) %>Delivery across <%= T %><% if (town.areas.length) { %>, including <%= town.areas.join(', ') %><% } %></li>
+        <li><%- include('partials/icon', {name:'check'}) %>Flat pricing — no hidden fees</li>
+        <li><%- include('partials/icon', {name:'check'}) %>7 days included, more time if you need it</li>
+        <li><%- include('partials/icon', {name:'check'}) %>Veteran &amp; Active Military discounts</li>
+      </ul>
+    </div>
+    <%- include('partials/form', { formTitle: 'Get a Dumpster in ' + T, formTown: T }) %>
+  </div>
+</section>
+
+<section class="sec sec--plate">
+  <div class="wrap">
+    <div class="sec__head"><p class="kicker"><span class="kicker__bar"></span><%= T %> pricing</p><h2 class="h2">Dumpster sizes in <%= T %></h2></div>
+    <%- include('partials/sizecards') %>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__head"><p class="kicker"><span class="kicker__bar"></span>Services in <%= T %></p><h2 class="h2">What <%= T %> rents us for</h2></div>
+    <div class="svc-grid svc-grid--sm">
+      <% services.forEach(s => { %>
+      <a class="svc" href="/services/<%= s.slug %>"><span class="svc__ico"><%- include('partials/icon', {name:s.icon}) %></span><h3><%= s.name %></h3><p><%= s.short %></p></a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark">
+  <div class="wrap narrow">
+    <div class="sec__head"><p class="kicker"><span class="kicker__bar"></span>FAQ</p><h2 class="h2"><%= T %> dumpster questions</h2></div>
+    <div class="faq">
+      <% townFaqs.forEach(([q,a]) => { %><details><summary><%= q %></summary><p><%= a %></p></details><% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__head"><h2 class="h2">Nearby towns we serve</h2></div>
+    <div class="chips"><% near.forEach(t => { %><a class="chip" href="/service-area/<%= t.slug %>">Dumpster rental <%= t.name %></a><% }) %></div>
+    <p class="mt"><a href="/service-area">See the full service area →</a></p>
+  </div>
+</section>
+
+<%- include('partials/cta', { ctaTown: T }) %>
+<%- include('partials/foot') %>

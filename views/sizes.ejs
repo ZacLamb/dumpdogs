@@ -1,0 +1,52 @@
+<%- include('partials/head') %>
+<%- include('partials/phero', { crumbs: [['Sizes & Pricing']], kicker: 'Rent smart. Get it done.', h1: 'Dumpster Sizes <span class="red">&amp; Pricing</span>', lead: 'Straight prices, 7 days included, no hidden fees. Here is exactly what you get.' }) %>
+
+<section class="sec sec--plate">
+  <div class="wrap"><%- include('partials/sizecards') %></div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__head"><p class="kicker"><span class="kicker__bar"></span>Side by side</p><h2 class="h2">10 yard vs 15 yard</h2></div>
+    <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th></th><% sizes.forEach(s => { %><th><%= s.yards %> Yard</th><% }) %></tr></thead>
+      <tbody>
+        <tr><th>Price</th><% sizes.forEach(s => { %><td class="red"><b>$<%= s.price %></b></td><% }) %></tr>
+        <tr><th>Rental period</th><% sizes.forEach(s => { %><td><%= s.days %> days</td><% }) %></tr>
+        <tr><th>Weight included</th><% sizes.forEach(s => { %><td><%= s.tons %> (<%= s.lbs %>)</td><% }) %></tr>
+        <tr><th>Dimensions (L × W × H)</th><% sizes.forEach(s => { %><td><%= s.dims.l %> × <%= s.dims.w %> × <%= s.dims.h %></td><% }) %></tr>
+        <tr><th>Holds about</th><% sizes.forEach(s => { %><td><%= s.pickups %> pickup loads (<%= s.bags %> kitchen bags)</td><% }) %></tr>
+        <tr><th>Overweight</th><% sizes.forEach(s => { %><td>$65 / 500 lbs</td><% }) %></tr>
+        <tr><th>Best for</th><% sizes.forEach(s => { %><td><%= s.bestFor %></td><% }) %></tr>
+      </tbody>
+    </table>
+    </div>
+    <figure class="chart"><img src="<%= img.sizeChart %>" alt="Size chart comparing what a 10 yard and 15 yard dumpster can hold" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="extras">
+  <div class="wrap">
+    <div class="sec__head"><p class="kicker"><span class="kicker__bar"></span>Extras</p><h2 class="h2">Special items, <span class="red">no problem.</span></h2><p class="sec__sub">These need special handling at the transfer station, so they carry a small per-item fee.</p></div>
+    <div class="extras">
+      <% extras.forEach(e => { %><div class="extra"><b><%= e.fee %></b><span><%= e.item %></span></div><% }) %>
+    </div>
+    <p class="extras__note">Hazardous materials (liquid paint, chemicals, solvents, oil, asbestos, batteries, medical waste) can't go in. Not sure about something? <a href="sms:<%= business.phoneHref %>">Text us</a> before you toss it.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap split split--form">
+    <div>
+      <p class="kicker"><span class="kicker__bar"></span>Not sure which size?</p>
+      <h2 class="h2">Send us a photo. <span class="red">We'll tell you.</span></h2>
+      <p>Text a picture of the pile, the room or the roof to <a href="sms:<%= business.phoneHref %>"><%= business.phone %></a> and we will point you to the right box so you don't pay for space — or weight — you don't need.</p>
+      <figure class="chart chart--sm"><img src="<%= img.priceSheet %>" alt="Dumpster Dawgs price sheet" loading="lazy"></figure>
+    </div>
+    <%- include('partials/form', { formTitle: 'Get Your Dumpster' }) %>
+  </div>
+</section>
+
+<%- include('partials/cta') %>
+<%- include('partials/foot') %>

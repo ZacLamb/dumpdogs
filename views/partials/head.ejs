@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= title %></title>
+<meta name="description" content="<%= description %>">
+<link rel="canonical" href="<%= canonical %>">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="<%= business.short %>">
+<meta property="og:title" content="<%= title %>">
+<meta property="og:description" content="<%= description %>">
+<meta property="og:url" content="<%= canonical %>">
+<meta property="og:image" content="<%= img.logo %>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d0d0d">
+<meta name="google-site-verification" content="2-Sv8BjJOYatqDmXCmtFrv7FvhzWZVp99_AW-fVLVxg">
+<meta name="msvalidate.01" content="39077271CBC372085AE9F9AF5C03F8B2">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&family=Black+Ops+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=1">
+<script type="application/ld+json">
+<%- JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": business.url + "/#business",
+  name: business.name,
+  image: img.logo,
+  logo: img.logo,
+  url: business.url,
+  telephone: "+1-" + business.phone,
+  email: business.email,
+  priceRange: "$$",
+  address: { "@type": "PostalAddress", streetAddress: business.street, addressLocality: business.city, addressRegion: business.state, postalCode: business.zip, addressCountry: "US" },
+  areaServed: towns.map(t => ({ "@type": "City", name: t.name + ", MA" })),
+  sameAs: [business.facebook],
+  makesOffer: sizes.map(s => ({ "@type": "Offer", name: s.yards + " Yard Dumpster Rental", price: s.price, priceCurrency: "USD" }))
+}) %>
+</script>
+<% if (typeof schema !== 'undefined') { %><script type="application/ld+json"><%- JSON.stringify(schema) %></script><% } %>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <div class="wrap topbar__in">
+    <span class="topbar__vet"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.8 5.8 20.3l1.6-6.8L2.2 8.9l6.9-.6z"/></svg> Veteran Owned &amp; Operated</span>
+    <span class="topbar__mid">Same day or next day delivery · No hidden fees</span>
+    <a class="topbar__phone" href="tel:<%= business.phoneHref %>">Call or text <strong><%= business.phone %></strong></a>
+  </div>
+</div>
+
+<header class="hdr" id="top">
+  <div class="wrap hdr__in">
+    <a href="/" class="brand" aria-label="<%= business.short %> home">
+      <img src="<%= img.logo %>" alt="Dumpster Dawgs logo" width="64" height="64">
+      <span class="brand__txt"><span class="brand__name">Dumpster<br>Dawgs</span><span class="brand__loc">Wareham, MA</span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="/dumpster-sizes" class="<%= path.startsWith('/dumpster-sizes') ? 'is-on' : '' %>">Sizes &amp; Pricing</a>
+      <a href="/services" class="<%= path.startsWith('/services') ? 'is-on' : '' %>">Services</a>
+      <a href="/service-area" class="<%= path.startsWith('/service-area') ? 'is-on' : '' %>">Service Area</a>
+      <a href="/about" class="<%= path === '/about' ? 'is-on' : '' %>">About</a>
+      <a href="/faq" class="<%= path === '/faq' ? 'is-on' : '' %>">FAQ</a>
+      <a href="/contact" class="btn btn--red nav__cta">Book a Dumpster</a>
+    </nav>
+    <a class="hdr__call" href="tel:<%= business.phoneHref %>" aria-label="Call <%= business.phone %>"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg></a>
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main id="main">

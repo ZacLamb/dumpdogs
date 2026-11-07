@@ -1,0 +1,40 @@
+<%- include('partials/head') %>
+<%- include('partials/phero', { crumbs: [['Sizes & Pricing','/dumpster-sizes'],[size.yards + ' Yard']], kicker: size.bestFor, h1: size.yards + ' Yard Dumpster <span class="red">— $' + size.price + '</span>', lead: size.days + ' days and ' + size.tons + ' (' + size.lbs + ') included. Holds about ' + size.pickups + ' pickup truck loads.' }) %>
+
+<section class="sec">
+  <div class="wrap split split--form">
+    <div>
+      <div class="specbox">
+        <div class="specbox__yd"><%= size.yards %><small>YD</small></div>
+        <ul>
+          <li><span>Length</span><b><%= size.dims.l %></b></li>
+          <li><span>Width</span><b><%= size.dims.w %></b></li>
+          <li><span>Height</span><b><%= size.dims.h %></b></li>
+          <li><span>Holds</span><b>~<%= size.pickups %> pickup loads</b></li>
+          <li><span>Kitchen bags</span><b>about <%= size.bags %></b></li>
+          <li><span>Rental</span><b><%= size.days %> days</b></li>
+          <li><span>Weight included</span><b><%= size.tons %></b></li>
+          <li><span>Overweight</span><b>$65 / 500 lbs</b></li>
+        </ul>
+      </div>
+      <h2 class="h3">What fits in a <%= size.yards %> yard?</h2>
+      <ul class="ticks"><% size.examples.forEach(x => { %><li><%- include('partials/icon', {name:'check'}) %><%= x %></li><% }) %></ul>
+      <h2 class="h3">Perfect for</h2>
+      <div class="chips"><% size.perfectFor.forEach(p => { %><span class="chip chip--static"><%= p %></span><% }) %></div>
+      <% const other = sizes.find(s => s.slug !== size.slug); if (other) { %>
+      <p class="mt">Need <%= other.yards > size.yards ? 'more' : 'less' %> room? The <a href="/dumpster-sizes/<%= other.slug %>"><%= other.yards %> yard dumpster</a> is $<%= other.price %>.</p>
+      <% } %>
+    </div>
+    <%- include('partials/form', { formTitle: 'Book a ' + size.yards + ' Yard', formSize: size.yards }) %>
+  </div>
+</section>
+
+<section class="sec sec--plate">
+  <div class="wrap">
+    <div class="sec__head"><h2 class="h2">Delivering <%= size.yards %> yard dumpsters to</h2></div>
+    <div class="chips"><% towns.forEach(t => { %><a class="chip" href="/service-area/<%= t.slug %>"><%= t.name %></a><% }) %></div>
+  </div>
+</section>
+
+<%- include('partials/cta') %>
+<%- include('partials/foot') %>

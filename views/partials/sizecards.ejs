@@ -1,0 +1,21 @@
+<div class="sizes">
+  <% sizes.forEach(s => { %>
+  <article class="size">
+    <div class="size__tag"><span class="size__yd"><%= s.yards %></span><span class="size__ydl">Yard<br>Dumpster</span></div>
+    <div class="size__price"><sup>$</sup><%= s.price %></div>
+    <p class="size__inc"><%= s.days %> days · <%= s.tons %> (<%= s.lbs %>) included</p>
+    <ul class="size__specs">
+      <li><b><%= s.dims.l %></b><span>Long</span></li>
+      <li><b><%= s.dims.w %></b><span>Wide</span></li>
+      <li><b><%= s.dims.h %></b><span>High</span></li>
+      <li><b>~<%= s.pickups %></b><span>Pickup loads</span></li>
+    </ul>
+    <p class="size__best"><%= s.bestFor %> — <%= s.perfectFor.join(', ').toLowerCase() %>.</p>
+    <div class="size__btns">
+      <a href="/contact?size=<%= s.yards %>" class="btn btn--red">Book <%= s.yards %> Yard</a>
+      <a href="/dumpster-sizes/<%= s.slug %>" class="btn btn--ghost">Details</a>
+    </div>
+  </article>
+  <% }) %>
+</div>
+<p class="sizes__note"><%= overage %>. Mattresses, tires &amp; appliances accepted for a small per-item fee — <a href="/dumpster-sizes#extras">see extras</a>.</p>

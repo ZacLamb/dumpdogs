@@ -1,0 +1,13 @@
+<section class="phero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><% (crumbs || []).forEach(c => { %> <span>/</span> <% if (c[1]) { %><a href="<%= c[1] %>"><%= c[0] %></a><% } else { %><span aria-current="page"><%= c[0] %></span><% } %><% }) %></nav>
+    <% if (typeof kicker !== 'undefined') { %><p class="kicker"><span class="kicker__bar"></span><%= kicker %></p><% } %>
+    <h1 class="phero__h"><%- h1 %></h1>
+    <% if (typeof lead !== 'undefined') { %><p class="phero__lead"><%= lead %></p><% } %>
+    <div class="phero__btns">
+      <a class="btn btn--red" href="tel:<%= business.phoneHref %>">Call <%= business.phone %></a>
+      <a class="btn btn--outline" href="sms:<%= business.phoneHref %>">Text Us</a>
+    </div>
+  </div>
+</section>
+<div class="hazard" aria-hidden="true"></div>

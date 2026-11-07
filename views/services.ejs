@@ -1,0 +1,22 @@
+<%- include('partials/head') %>
+<%- include('partials/phero', { crumbs: [['Services']], kicker: 'What we haul', h1: 'Dumpsters for <span class="red">every job.</span>', lead: 'Cleanouts, remodels, roofing, yard work and job sites — 10 and 15 yard roll-offs delivered same day or next day.' }) %>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="svc-grid">
+      <% services.forEach(s => { %>
+      <a class="svc" href="/services/<%= s.slug %>">
+        <span class="svc__ico"><%- include('partials/icon', {name:s.icon}) %></span>
+        <h3><%= s.name %></h3>
+        <p><%= s.short %></p>
+        <span class="svc__go">Usually a <%= s.size %> yard →</span>
+      </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--plate"><div class="wrap"><div class="sec__head"><h2 class="h2">Pricing</h2></div><%- include('partials/sizecards') %></div></section>
+
+<%- include('partials/cta') %>
+<%- include('partials/foot') %>

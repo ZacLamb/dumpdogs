@@ -1,0 +1,36 @@
+<%- include('partials/head') %>
+<%- include('partials/phero', { crumbs: [['About']], kicker: 'Local · Veteran owned & operated', h1: 'Family owned. <span class="red">Dawg approved.</span>', lead: 'A hometown dumpster company out of Wareham, MA, serving the South Shore, the South Coast and the Cape.' }) %>
+
+<section class="sec">
+  <div class="wrap split">
+    <div class="split__img">
+      <img src="<%= img.logo %>" alt="Dumpster Dawgs logo with Bernie and Pete" loading="lazy">
+    </div>
+    <div class="split__copy prose">
+      <h2 class="h2">Who we are</h2>
+      <p>Dumpster Dawgs LLC is local and veteran owned &amp; operated. We give homeowners and contractors around Wareham what should be easy to find: a dumpster that shows up when promised, at a price that's actually the price.</p>
+      <p>That means fair, transparent pricing with no hidden fees, great customer service, and flexible options — same day or next day delivery, or booked in advance. If you need something a little different, just ask.</p>
+      <h3 class="h3">Meet Bernie &amp; Pete</h3>
+      <p>Every good crew needs mascots. Bernie and Pete are the Dawgs behind the name — and the reason you'll see two pups on every one of our dumpsters.</p>
+      <ul class="ticks">
+        <li><%- include('partials/icon', {name:'check'}) %>Veteran owned</li>
+        <li><%- include('partials/icon', {name:'check'}) %>Prompt delivery</li>
+        <li><%- include('partials/icon', {name:'check'}) %>Customer focused</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="mil">
+  <div class="wrap mil__in">
+    <img src="<%= img.military %>" alt="Veteran and military discount" loading="lazy">
+    <div>
+      <p class="stencil mil__k">Thank you for your service</p>
+      <h2 class="h2">Veteran &amp; Active Military Discounts</h2>
+      <p>Mention it at time of booking.</p>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/cta') %>
+<%- include('partials/foot') %>

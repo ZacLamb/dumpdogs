@@ -1,0 +1,20 @@
+<%- include('partials/head') %>
+<%- include('partials/phero', { crumbs: [['Service Area']], kicker: 'Where we deliver', h1: 'From the canal <span class="red">to the coast.</span>', lead: 'Based in Wareham and delivering 10 and 15 yard dumpsters across Cape Cod, the South Shore and the South Coast. Don\'t see your town? Call — we probably cover it.' }) %>
+
+<section class="sec">
+  <div class="wrap">
+    <% Object.entries(regions).forEach(([key, r]) => { %>
+    <div class="region region--lg">
+      <h2 class="region__h"><%- include('partials/icon', {name:'pin'}) %><%= r.name %></h2>
+      <div class="town-grid">
+        <% towns.filter(t => t.region === key).forEach(t => { %>
+        <a class="town-card" href="/service-area/<%= t.slug %>"><b><%= t.name %>, MA</b><span><%= t.areas.slice(0,3).join(' · ') %></span></a>
+        <% }) %>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</section>
+
+<%- include('partials/cta') %>
+<%- include('partials/foot') %>

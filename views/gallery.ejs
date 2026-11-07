@@ -1,0 +1,12 @@
+<%- include('partials/head') %>
+<%- include('partials/phero', { crumbs: [['Gallery']], kicker: 'On the job', h1: 'Gallery', lead: 'Dumpsters dropped, jobs done.' }) %>
+<section class="sec">
+  <div class="wrap">
+    <div class="gal gal--full">
+      <% img.gallery.forEach((g,i) => { %><figure class="gal__i"><img src="<%= g %>" alt="Dumpster Dawgs job photo <%= i+1 %>" loading="lazy"></figure><% }) %>
+    </div>
+    <p class="mt">More on <a href="<%= business.facebook %>" target="_blank" rel="noopener">our Facebook page →</a></p>
+  </div>
+</section>
+<%- include('partials/cta') %>
+<%- include('partials/foot') %>

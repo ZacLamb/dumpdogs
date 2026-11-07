@@ -1,0 +1,48 @@
+</main>
+
+<footer class="ftr">
+  <div class="ftr__torn" aria-hidden="true"></div>
+  <div class="wrap ftr__grid">
+    <div class="ftr__brand">
+      <img src="<%= img.logo %>" alt="" width="96" height="96" loading="lazy">
+      <p class="stencil">Dump it. We haul it.</p>
+      <p>Local, veteran owned &amp; operated dumpster rentals out of Wareham, MA.</p>
+      <p class="ftr__vet">Veteran &amp; Active Military discounts — mention it when you book.</p>
+    </div>
+    <div>
+      <h4>Rentals</h4>
+      <ul>
+        <% sizes.forEach(s => { %><li><a href="/dumpster-sizes/<%= s.slug %>"><%= s.yards %> Yard Dumpster — $<%= s.price %></a></li><% }) %>
+        <% services.forEach(s => { %><li><a href="/services/<%= s.slug %>"><%= s.name %></a></li><% }) %>
+      </ul>
+    </div>
+    <div>
+      <h4>Popular Towns</h4>
+      <ul class="ftr__towns">
+        <% towns.slice(0, 18).forEach(t => { %><li><a href="/service-area/<%= t.slug %>"><%= t.name %></a></li><% }) %>
+      </ul>
+      <a class="ftr__more" href="/service-area">All towns we serve →</a>
+    </div>
+    <div>
+      <h4>Get In Touch</h4>
+      <p><a class="ftr__phone" href="tel:<%= business.phoneHref %>"><%= business.phone %></a><br><span class="muted">Call or text</span></p>
+      <p><a href="mailto:<%= business.email %>"><%= business.email %></a></p>
+      <p><%= business.street %><br><%= business.city %>, <%= business.state %> <%= business.zip %></p>
+      <p><a href="<%= business.facebook %>" target="_blank" rel="noopener">Facebook →</a></p>
+    </div>
+  </div>
+  <div class="wrap ftr__base">
+    <span>© <%= year %> <%= business.name %>. All rights reserved.</span>
+    <span><a href="/faq">FAQ</a> · <a href="/gallery">Gallery</a> · <a href="/contact">Contact</a></span>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a href="tel:<%= business.phoneHref %>" class="mbar__call">Call</a>
+  <a href="sms:<%= business.phoneHref %>" class="mbar__text">Text</a>
+  <a href="/contact" class="mbar__book">Book Now</a>
+</div>
+
+<script src="/js/main.js" defer></script>
+</body>
+</html>

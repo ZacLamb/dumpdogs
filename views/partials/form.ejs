@@ -1,0 +1,32 @@
+<% const preTown = (typeof formTown !== 'undefined') ? formTown : ''; const preSize = (typeof formSize !== 'undefined') ? formSize : ''; %>
+<form class="qform" action="/api/lead" method="post" data-lead>
+  <div class="qform__head">
+    <span class="qform__kicker">Fast quote</span>
+    <h3 class="qform__title"><%= typeof formTitle !== 'undefined' ? formTitle : 'Book Your Dumpster' %></h3>
+    <p class="qform__sub">We'll get right back to you. In a hurry? Call or text <a href="tel:<%= business.phoneHref %>"><%= business.phone %></a>.</p>
+  </div>
+  <div class="qform__row">
+    <label>First name*<input name="first_name" required autocomplete="given-name"></label>
+    <label>Last name<input name="last_name" autocomplete="family-name"></label>
+  </div>
+  <div class="qform__row">
+    <label>Phone*<input name="phone" type="tel" required autocomplete="tel"></label>
+    <label>Email<input name="email" type="email" autocomplete="email"></label>
+  </div>
+  <div class="qform__row">
+    <label>Town*<input name="town" required value="<%= preTown %>" list="townlist" autocomplete="address-level2"></label>
+    <label>Dumpster size
+      <select name="size">
+        <option value="">Not sure — help me pick</option>
+        <% sizes.forEach(s => { %><option value="<%= s.yards %> yard" <%= preSize == s.yards ? 'selected' : '' %>><%= s.yards %> Yard — $<%= s.price %></option><% }) %>
+      </select>
+    </label>
+  </div>
+  <label>Dates, project, anything we should know<textarea name="message" rows="3" placeholder="e.g. Kitchen remodel, need it Friday for about a week"></textarea></label>
+  <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <input type="hidden" name="page" value="<%= path %>">
+  <button class="btn btn--red btn--block" type="submit">Send Request</button>
+  <p class="qform__ok" hidden>Got it — we'll be in touch shortly. Need it fast? Call or text <a href="tel:<%= business.phoneHref %>"><%= business.phone %></a>.</p>
+  <p class="qform__err" hidden></p>
+  <datalist id="townlist"><% towns.forEach(t => { %><option value="<%= t.name %>"><% }) %></datalist>
+</form>

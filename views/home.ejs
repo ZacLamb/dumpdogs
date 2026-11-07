@@ -1,0 +1,142 @@
+<%- include('partials/head') %>
+
+<section class="hero">
+  <div class="hero__bg" style="background-image:url('<%= img.gallery[0] %>')"></div>
+  <div class="wrap hero__in">
+    <div class="hero__copy">
+      <p class="kicker"><span class="kicker__bar"></span>Wareham · Cape Cod · South Shore · South Coast</p>
+      <h1 class="hero__h">Big or small,<br><span class="red">we haul it all.</span></h1>
+      <p class="hero__lead">Roll-off dumpster rentals from a local, veteran owned crew. Same day or next day delivery, straight pricing, and no hidden fees.</p>
+      <div class="hero__prices">
+        <% sizes.forEach(s => { %>
+        <a class="pchip" href="/dumpster-sizes/<%= s.slug %>"><span class="pchip__yd"><%= s.yards %> YD</span><span class="pchip__pr">$<%= s.price %></span><span class="pchip__in"><%= s.days %> days · <%= s.tons %></span></a>
+        <% }) %>
+      </div>
+      <div class="hero__btns">
+        <a class="btn btn--red btn--lg" href="tel:<%= business.phoneHref %>"><%- include('partials/icon', {name:'phone'}) %> Call <%= business.phone %></a>
+        <a class="btn btn--outline btn--lg" href="sms:<%= business.phoneHref %>">Text for a Quote</a>
+      </div>
+    </div>
+    <div class="hero__form"><%- include('partials/form') %></div>
+  </div>
+</section>
+
+<div class="hazard" aria-hidden="true"></div>
+
+<section class="proof">
+  <div class="wrap proof__grid">
+    <div class="proof__item"><%- include('partials/icon', {name:'star'}) %><div><b>Veteran Owned</b><span>Local &amp; operated in Wareham</span></div></div>
+    <div class="proof__item"><%- include('partials/icon', {name:'clock'}) %><div><b>Same / Next Day</b><span>Or book ahead — your call</span></div></div>
+    <div class="proof__item"><%- include('partials/icon', {name:'tag'}) %><div><b>No Hidden Fees</b><span>Fair, transparent pricing</span></div></div>
+    <div class="proof__item"><%- include('partials/icon', {name:'truck'}) %><div><b>Flexible Options</b><span>Just ask for what you need</span></div></div>
+  </div>
+</section>
+
+<section class="sec sec--plate" id="sizes">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="kicker"><span class="kicker__bar"></span>Sizes &amp; Pricing</p>
+      <h2 class="h2">Two boxes. <span class="red">One flat price.</span></h2>
+      <p class="sec__sub">Every rental includes 7 days and generous weight. Pick your size, we drop it where you need it.</p>
+    </div>
+    <%- include('partials/sizecards') %>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="kicker"><span class="kicker__bar"></span>What We Haul</p>
+      <h2 class="h2">Built for every kind of mess.</h2>
+    </div>
+    <div class="svc-grid">
+      <% services.forEach(s => { %>
+      <a class="svc" href="/services/<%= s.slug %>">
+        <span class="svc__ico"><%- include('partials/icon', {name:s.icon}) %></span>
+        <h3><%= s.name %></h3>
+        <p><%= s.short %></p>
+        <span class="svc__go">Go →</span>
+      </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark how">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="kicker"><span class="kicker__bar"></span>How It Works</p>
+      <h2 class="h2">Dump it. <span class="red">We haul it.</span></h2>
+    </div>
+    <ol class="steps">
+      <li><span class="steps__n">01</span><h3>Call, text or book</h3><p>Tell us your town, your project and your dates. Not sure on size? Send a photo.</p></li>
+      <li><span class="steps__n">02</span><h3>We drop it off</h3><p>Same day or next day when available, or right on the date you scheduled.</p></li>
+      <li><span class="steps__n">03</span><h3>You fill it up</h3><p>Seven days to load it at your own pace. Need more time? Just ask.</p></li>
+      <li><span class="steps__n">04</span><h3>We haul it away</h3><p>Give us a shout when you're done and it's gone. Clean driveway, done job.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap split">
+    <div class="split__img">
+      <img src="<%= img.truck %>" alt="Dumpster Dawgs truck" loading="lazy">
+      <div class="dogtag"><span>Meet the crew</span><b>Bernie &amp; Pete</b></div>
+    </div>
+    <div class="split__copy">
+      <p class="kicker"><span class="kicker__bar"></span>Local &amp; Veteran Owned</p>
+      <h2 class="h2">Hometown hauling out of <span class="red">Wareham</span>.</h2>
+      <p>Dumpster Dawgs is a local, veteran owned and operated company right on Summer Street in Wareham. We serve our neighbors across the South Shore, the South Coast and all over the Cape.</p>
+      <p>No call centers and no runaround — just honest pricing, great customer service, and dumpsters that show up when we say they will. Bernie and Pete wouldn't have it any other way.</p>
+      <ul class="ticks">
+        <li><%- include('partials/icon', {name:'check'}) %>Fair, transparent pricing — no hidden fees</li>
+        <li><%- include('partials/icon', {name:'check'}) %>Same day, next day, or booked in advance</li>
+        <li><%- include('partials/icon', {name:'check'}) %>Flexible — just ask for what you need</li>
+      </ul>
+      <a href="/about" class="btn btn--dark">Our Story</a>
+    </div>
+  </div>
+</section>
+
+<section class="mil">
+  <div class="wrap mil__in">
+    <img src="<%= img.military %>" alt="Veteran and military discount" loading="lazy">
+    <div>
+      <p class="stencil mil__k">Thank you for your service</p>
+      <h2 class="h2">Veteran &amp; Active Military Discounts</h2>
+      <p>We're proud to offer discounts to Veterans and Active Military. Just mention it when you book.</p>
+      <a class="btn btn--red" href="tel:<%= business.phoneHref %>">Call to Book</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--plate">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="kicker"><span class="kicker__bar"></span>Service Area</p>
+      <h2 class="h2">From the canal to the coast.</h2>
+      <p class="sec__sub">Delivering dumpsters across <%= towns.length %>+ towns on Cape Cod, the South Shore and the South Coast.</p>
+    </div>
+    <% Object.entries(regions).forEach(([key, r]) => { %>
+    <div class="region">
+      <h3 class="region__h"><%= r.name %></h3>
+      <div class="chips"><% towns.filter(t => t.region === key).forEach(t => { %><a class="chip" href="/service-area/<%= t.slug %>"><%= t.name %></a><% }) %></div>
+    </div>
+    <% }) %>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="kicker"><span class="kicker__bar"></span>On The Job</p>
+      <h2 class="h2">Out in the field.</h2>
+    </div>
+    <div class="gal">
+      <% img.gallery.slice(0,4).forEach((g,i) => { %><a href="/gallery" class="gal__i"><img src="<%= g %>" alt="Dumpster Dawgs job photo <%= i+1 %>" loading="lazy"></a><% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/cta') %>
+<%- include('partials/foot') %>

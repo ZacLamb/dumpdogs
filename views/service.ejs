@@ -1,0 +1,34 @@
+<% const rec = sizes.find(s => s.yards === service.size) || sizes[0]; %>
+<%- include('partials/head') %>
+<%- include('partials/phero', { crumbs: [['Services','/services'],[service.name]], kicker: 'Dumpster rental for', h1: service.name, lead: service.short }) %>
+
+<section class="sec">
+  <div class="wrap split split--form">
+    <div class="prose">
+      <% service.body.forEach(p => { %><p><%= p %></p><% }) %>
+      <h2 class="h3">What goes in</h2>
+      <ul class="ticks"><% service.items.forEach(x => { %><li><%- include('partials/icon', {name:'check'}) %><%= x %></li><% }) %></ul>
+      <div class="rec">
+        <span class="rec__k">Our usual pick</span>
+        <b><%= rec.yards %> Yard Dumpster — $<%= rec.price %></b>
+        <span><%= rec.days %> days · <%= rec.tons %> included · about <%= rec.pickups %> pickup loads</span>
+        <a href="/dumpster-sizes/<%= rec.slug %>">See the <%= rec.yards %> yard →</a>
+      </div>
+    </div>
+    <%- include('partials/form', { formTitle: 'Book for ' + service.name, formSize: rec.yards }) %>
+  </div>
+</section>
+
+<section class="sec sec--plate"><div class="wrap"><div class="sec__head"><h2 class="h2">Sizes &amp; Pricing</h2></div><%- include('partials/sizecards') %></div></section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__head"><h2 class="h2"><%= service.name %> dumpsters near you</h2></div>
+    <div class="chips"><% towns.forEach(t => { %><a class="chip" href="/service-area/<%= t.slug %>"><%= t.name %></a><% }) %></div>
+    <h3 class="h3 mt">Other services</h3>
+    <div class="chips"><% services.filter(s => s.slug !== service.slug).forEach(s => { %><a class="chip chip--dark" href="/services/<%= s.slug %>"><%= s.name %></a><% }) %></div>
+  </div>
+</section>
+
+<%- include('partials/cta') %>
+<%- include('partials/foot') %>

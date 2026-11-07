@@ -1,0 +1,13 @@
+<% const schema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }; %>
+<%- include('partials/head', { schema }) %>
+<%- include('partials/phero', { crumbs: [['FAQ']], kicker: 'Straight answers', h1: 'Dumpster Rental <span class="red">FAQ</span>' }) %>
+<section class="sec">
+  <div class="wrap narrow">
+    <div class="faq faq--light">
+      <% faqs.forEach(([q,a]) => { %><details><summary><%= q %></summary><p><%= a %></p></details><% }) %>
+    </div>
+    <p class="mt">Still have a question? Call or text <a href="tel:<%= business.phoneHref %>"><%= business.phone %></a>.</p>
+  </div>
+</section>
+<%- include('partials/cta') %>
+<%- include('partials/foot') %>

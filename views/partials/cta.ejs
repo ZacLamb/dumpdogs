@@ -1,0 +1,13 @@
+<section class="cta">
+  <div class="wrap cta__in">
+    <div>
+      <p class="cta__kicker stencil">Big or small</p>
+      <h2 class="cta__h">We haul it all<%= typeof ctaTown !== 'undefined' ? ' in ' + ctaTown : '' %>.</h2>
+      <p>Same day or next day delivery. Fair price, no hidden fees. Local guys who pick up the phone.</p>
+    </div>
+    <div class="cta__btns">
+      <a class="btn btn--white btn--lg" href="tel:<%= business.phoneHref %>">Call <%= business.phone %></a>
+      <a class="btn btn--outline btn--lg" href="sms:<%= business.phoneHref %>">Text Us</a>
+    </div>
+  </div>
+</section>
