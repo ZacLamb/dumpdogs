@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const site = require('./data/site');
+const { sendLeadEmail } = require('./lib/mailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -142,17 +143,21 @@ app.post('/api/lead', async (req, res) => {
     return res.redirect('/contact');
   }
   console.log('[lead]', JSON.stringify(lead));
+  const tasks = [
+    sendLeadEmail(lead)
+      .then((via) => via && console.log('[lead] emailed via', via))
+      .catch((e) => console.error('[lead] email failed', e.message)),
+  ];
   if (process.env.LEAD_WEBHOOK_URL) {
-    try {
-      await fetch(process.env.LEAD_WEBHOOK_URL, {
+    tasks.push(
+      fetch(process.env.LEAD_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(lead),
-      });
-    } catch (e) {
-      console.error('[lead] webhook failed', e.message);
-    }
+      }).catch((e) => console.error('[lead] webhook failed', e.message))
+    );
   }
+  await Promise.all(tasks);
   if (wantsJson) return res.json({ ok: true });
   res.redirect('/contact?sent=1');
 });
