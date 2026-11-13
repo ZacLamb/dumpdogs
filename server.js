@@ -3,6 +3,7 @@ const path = require('path');
 const compression = require('compression');
 const site = require('./data/site');
 const { sendLeadEmail } = require('./lib/mailer');
+const analytics = require('./lib/analytics');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,13 @@ app.use((req, res, next) => {
   });
   next();
 });
+
+// Visitor tracking + owner dashboard (/dashboard) + returning-lead alerts + daily digest
+analytics.mount(app, site);
+
+app.get('/privacy', (req, res) =>
+  res.render('privacy', { title: `Privacy | ${site.business.short}`, description: `How ${site.business.name} handles website data.` })
+);
 
 const sizeBySlug = Object.fromEntries(site.sizes.map((s) => [s.slug, s]));
 const serviceBySlug = Object.fromEntries(site.services.map((s) => [s.slug, s]));
@@ -141,6 +149,12 @@ app.post('/api/lead', async (req, res) => {
   if (!lead.first_name || (!lead.phone && !lead.email)) {
     if (wantsJson) return res.status(400).json({ ok: false, error: 'Name and a phone or email are required.' });
     return res.redirect('/contact');
+  }
+  try {
+    const linked = await analytics.linkLead(req, lead); // ties this browser to the lead for return alerts
+    if (linked) lead.traffic_source = linked.first_source;
+  } catch (e) {
+    console.error('[lead] analytics link failed', e.message);
   }
   console.log('[lead]', JSON.stringify(lead));
   const tasks = [

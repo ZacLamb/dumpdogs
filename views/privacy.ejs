@@ -1,0 +1,16 @@
+<%- include('partials/head') %>
+<%- include('partials/phero', { crumbs: [['Privacy']], kicker: 'Plain English', h1: 'Privacy' }) %>
+<section class="sec">
+  <div class="wrap narrow prose">
+    <p><%= business.name %> runs this website. Here's what it collects and why.</p>
+    <h2 class="h3">Website visits</h2>
+    <p>We count visits to understand which pages and towns people are interested in. To do that, the site sets a small first-party cookie containing a random ID so repeat visits can be counted. We record the pages viewed, the time, the general type of device (phone, tablet or computer) and how you arrived (for example, from a Google search). We do not store your IP address, and we don't use third-party advertising or tracking scripts.</p>
+    <h2 class="h3">Quote requests</h2>
+    <p>When you send a request, we keep the details you give us (name, phone, email, town, and project notes) so we can follow up. Once you've sent a request, your later visits to this site may be linked to it so we know you're still interested and can get back to you promptly.</p>
+    <h2 class="h3">Sharing</h2>
+    <p>We don't sell your information. Your request is stored in our customer management system so our team can respond to it.</p>
+    <h2 class="h3">Questions or removal</h2>
+    <p>To ask about or remove your information, email <a href="mailto:<%= business.email %>"><%= business.email %></a> or call <a href="tel:<%= business.phoneHref %>"><%= business.phone %></a>. You can also clear this site's cookies in your browser at any time.</p>
+  </div>
+</section>
+<%- include('partials/foot') %>
