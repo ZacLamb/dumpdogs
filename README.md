@@ -18,3 +18,17 @@ Currently hotlinked from the old Wix media library. Before cancelling Wix, downl
 
 ## Lead payload
 `first_name, last_name, phone, email, town, dumpster_size, message, page, source, submitted_at`
+
+## Visitor dashboard & alerts
+- `/dashboard` — password-protected owner dashboard (visits, sources, top pages/towns, live feed, leads).
+- Emails the owner when a past lead comes back to the site (max once per 6h per lead), plus a daily digest at 7am.
+- First-party only: random-ID cookie, no IPs stored, bots filtered, owner's own visits excluded. See `/privacy`.
+
+Railway variables:
+| Variable | Purpose |
+|---|---|
+| `DASHBOARD_PASSWORD` | Required to open /dashboard (user is `owner`, or set `DASHBOARD_USER`) |
+| `DATABASE_URL` | Postgres — keeps history across redeploys (without it, data resets on each deploy) |
+| `ALERT_WEBHOOK_URL` | GHL inbound webhook for the "Website Visitor Alerts" workflow (emails subject/body_html) |
+| `SITE_TZ`, `DIGEST_HOUR` | Default `America/New_York`, `7` |
+| `ALERT_COOLDOWN_HOURS`, `ALERT_DELAY_MINUTES`, `DIGEST_ENABLED` | Optional tuning (6, 3, true) |
